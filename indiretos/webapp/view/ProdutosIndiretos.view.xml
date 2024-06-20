@@ -1,0 +1,223 @@
+<mvc:View
+    xmlns:layout="sap.ui.layout"
+    controllerName="com.devmagnum.indiretos.controller.ProdutosIndiretos"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:plugins="sap.ui.table.plugins"
+    xmlns="sap.m"
+    class="body-style"
+>
+    <Page id="page">
+        <layout:HorizontalLayout
+            id="_IDGenHorizontalLayout1"
+            class="centered-layout"
+        >
+            <Image
+                id="imageheader"
+                src="/image/magnum.png"
+            />
+        </layout:HorizontalLayout>
+
+        <MessageStrip
+            id="tipoMaterial"
+            text="TIPO DE MATERIAL"
+            type="Information"
+            showIcon="false"
+            class="sapMMessageStrip centered-layout centered-message"
+        />
+
+        <MultiComboBox
+            id="combomarcas"
+            class="sapMComboBox"
+            required="true"
+            width="16%"
+            selectionChange="onMarcasSelectionChange"
+        >
+            <core:Item
+                id="item1"
+                key="NLAG"
+                text="NLAG"
+            />
+            <core:Item
+                id="item2"
+                key="HIBE"
+                text="HIBE"
+            />
+            <core:Item
+                id="item3"
+                key="SERV"
+                text="SERV"
+            />
+        </MultiComboBox>
+
+        <MessageStrip
+            id="ObjetivoMaterial"
+            text="OBJETIVO DO MATERIAL A CADASTRAR"
+            type="Information"
+            showIcon="false"
+            class="sapMMessageStrip centered-layout centered-message"
+        />
+
+        <TextArea
+            id="ObjetivoCadastrar"
+            rows="5"
+            width="100%"
+            placeholder="Informar resumidamente para que será utilizado o material a cadastrar(Obrigatório)"
+            required="true"
+        />
+
+        <MessageStrip
+            id="DescricaoDetalhadaProduto"
+            text="DESCRIÇÃO DETALHADA DO PRODUTO"
+            type="Information"
+            showIcon="false"
+            class="sapMMessageStrip  centered-layout centered-message"
+        />
+
+        <TextArea
+            id="DescricaoDetalProduto"
+            rows="5"
+            width="100%"
+            placeholder="Descrição detalhada(Obrigatório)"
+            required="true"
+        />
+
+        <MessageStrip
+            id="UnidadeMedida"
+            text="UNIDADE DE MEDIDA"
+            type="Information"
+            showIcon="false"
+            class="sapMMessageStrip centered-layout centered-message"
+        />
+
+        <ComboBox
+            id="unidademedidaindireto"
+            items="{/Medida}"
+            selectedKey="{Medida>/Medida}"
+            class="sapMComboBox"
+            required="true"
+        >
+            <core:Item
+                id="unidademedida"
+                key="{Medida}"
+                text="{Medida}"
+            />
+        </ComboBox>
+
+        <MessageStrip
+            id="PreenchimentoContab"
+            text="CAMPOS DE PREENCHIMENTO DA CONTABILIDADE"
+            type="Information"
+            showIcon="false"
+            class="sapMMessageStrip centered-layout centered-message"
+        />
+
+        <layout:VerticalLayout id="campos-contabilidade">
+            <Label
+                id="ClasseAvaliacao"
+                text="CLASSE DE AVALIAÇÃO"
+                labelFor="input-e"
+            />
+
+            <ComboBox
+                id="ClasseAvalia"
+                items="{/ClasseAvaliacao}"
+                selectedKey="{ClasseAvaliacao>/ClasseAvaliacao}"
+            >
+                <core:Item
+                    id="_IDGenItem2"
+                    key="{ClasseAvaliacao}"
+                    text="{ClasseAvaliacao}"
+                />
+            </ComboBox>
+
+            <Label
+                id="Centro"
+                text="CENTRO (UNIDADE)"
+                labelFor="input-e"
+            />
+
+            <ComboBox
+                id="CentroUn"
+                items="{/Centro}"
+                selectedKey="{Centro>/Centro}"
+            >
+                <core:Item
+                    id="_IDGenItem3"
+                    key="{Centro}"
+                    text="{Centro}"
+                />
+            </ComboBox>
+
+            <Label
+                id="NCM"
+                text="NCM"
+                labelFor="input-e"
+            />
+
+            <ComboBox
+                id="ncm"
+                items="{
+                path:  '/NCM',
+                filters: [
+                    {path: 'Status', operator: 'EQ', value1: 'ATIVO'}
+                        ]
+                    }"
+                selectedKey="{NCM>/NCM}"
+                enabled="{= ${combomarcas}.getSelectedItems().length > 0 }"
+            >
+                <core:Item
+                    id="item4"
+                    key="{NCM}"
+                    text="{NCM}"
+                />
+            </ComboBox>
+
+            <Label
+                id="LC"
+                text="LC"
+                labelFor="input-e"
+            />
+
+            <ComboBox
+                id="lc"
+                items="{
+                path:'/LC',
+                filters: [
+                            { path: 'Status', operator: 'EQ', value1: 'OBSOLETO' }
+                        ] 
+                    }"
+                selectedKey="{LC>/LC}"
+                enabled="{= ${combomarcas}.getSelectedItems().length > 0 }"
+            >
+                <core:Item
+                    id="LCIndireto"
+                    key="{NCM}"
+                    text="{NCM}"
+                />
+            </ComboBox>
+        </layout:VerticalLayout>
+
+        <layout:HorizontalLayout
+            id="_IDGenHorizontalLayout2"
+            class="buttons-container"
+        >
+            <Button
+                id="btnGravarPasseio"
+                text="Gravar"
+                type="Accept"
+                press="onPressGravar"
+                class="buttons botao-gravar"
+            />
+            <Button
+                id="btnCancelarPasseio"
+                text="Cancelar"
+                type="Reject"
+                press="onPressCancelar"
+                class="buttons botao-cancelar"
+            />
+        </layout:HorizontalLayout>
+    </Page>
+</mvc:View>

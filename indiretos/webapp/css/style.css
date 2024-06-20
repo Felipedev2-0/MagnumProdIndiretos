@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Helvetica", sans-serif;
+    font-size: 20px;
+}
+
+.body-style{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.centered-layout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-message{
+    text-align: center;
+}
+
+/* Estilo para o contêiner dos botões */
+.buttons-container{
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    
+    
+}
+
+/*Estilização dos botoes*/
+.buttons{
+    width: 130px;
+    margin-left: 5px;
+}
+
+.botao-gravar{
+    
+}
+
+.sapMMessageStrip {
+    background-color: #292525;
+    font-weight: bold;
+
+}
+
+/* Estilo para o texto dentro dos MessageStrip */
+.sapMMessageStrip .sapMText {
+    color: white; /* Define a cor do texto como branco */
+}
+
